@@ -8,10 +8,16 @@ from sqlmodel import Session, create_engine, SQLModel
 
 load_dotenv()
 
-USERNAME = os.getenv('DB_USERNAME')
-PASSWORD = os.getenv('DB_PASSWORD')
+DB_HOST = os.getenv("MYSQLHOST")
+DB_PORT = os.getenv("MYSQLPORT")
+DB_USER = os.getenv("MYSQLUSER")
+DB_PASSWORD = os.getenv("MYSQLPASSWORD")
+DB_NAME = os.getenv("MYSQLDATABASE")
 
-DB_URL = f"mysql+mysqlconnector://{USERNAME}:{PASSWORD}@localhost:3306/fastapi_todo"
+DB_URL = (
+    f"mysql+mysqlconnector://{DB_USER}:{DB_PASSWORD}"
+    f"@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+)
 
 engine = create_engine(DB_URL, echo=True)
 
